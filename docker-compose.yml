@@ -1,0 +1,23 @@
+services:
+  # https://hub.docker.com/_/mysql
+  mysqldb:
+    image: mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    ports:
+      - 3306:3306
+  # https://hub.docker.com/_/phpmyadmin
+  phpmyadmin-table:
+    image: phpmyadmin
+    restart: always
+    environment:
+      - PMA_HOST=mysqldb
+      - PMA_PORT=3306
+      # - PMA_USER=${MYSQL_USER}
+      # - PMA_PASSWORD=${MYSQL_PASSWORD}
+    ports:
+      - 8080:80
